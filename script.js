@@ -1,6 +1,6 @@
 let inputElement = document.getElementById('inputElement');
 let listElement = document.getElementById('listElement');
-let lista = [];
+let lista = JSON.parse(localStorage.getItem('@listaTarefas')) || [];
 
 function adicionarTarefa(event){
   event.preventDefault();
@@ -13,6 +13,7 @@ function adicionarTarefa(event){
   inputElement.value = "";
 
   renderizarTarefa();
+  salvarDados();
 
 }
 
@@ -36,6 +37,11 @@ function renderizarTarefa(){
       lista.splice(element, 1)
       renderizarTarefa();
     })
-
   });
 }
+
+function salvarDados(){
+  localStorage.setItem('@listaTarefas', JSON.stringify(lista));
+};
+
+renderizarTarefa();
